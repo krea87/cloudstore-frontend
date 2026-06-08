@@ -1,7 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { logoutUser } from '../../api/api';
+import './Navbar.css';
 
-function Navbar() {
+function Navbar( { cartCount }) {
 
     // Check if there is a token in localStorage
     // If there is a token, isLoggedIn will be true, otherwise it will be false
@@ -12,17 +14,18 @@ function Navbar() {
   return (
     <div>
         <nav className="navbar">
-            <ul>
-                <li><a href="/">Home</a></li>
+            <ul className="nav-links">
+                <li><Link to="/">Home</Link></li>
                 {isLoggedIn ? (
                     <>
-                        <li><a href="/products">Products</a></li>
-                        <li><a href="/logout" onClick={logoutUser}>Logout</a></li>
+                        <li><Link to="/products">Products</Link></li>
+                        <li><Link to="/cart">Cart {cartCount > 0 && `(${cartCount})`}</Link></li>
+                        <li><Link to="/" onClick={logoutUser}>Logout</Link></li>
                     </>
                 ) : (
                     <>
-                        <li><a href="/login">Login</a></li>
-                        <li><a href="/register">Register</a></li>
+                        <li><Link to="/login">Login</Link></li>
+                        <li><Link to="/register">Register</Link></li>
                     </>
                 )}
             </ul>

@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useApiWithFallback } from "../../api/api";
+import { useProducts } from "../../api/api";
 import Product from "../../components/Product/Product";
+import './Products.css';
 
 
 
 
 
-function ProductsPage() {
+function ProductsPage({ onAddToCart }) {
 
 
-const {data: products, loading, error} = useApiWithFallback("/api/products");
+const {data: products, loading, error} = useProducts();
 
 if(loading) return <div> Loading products...</div>
 if(error && !products) return <div> Retrying... {error}</div>
@@ -18,7 +19,7 @@ if(error && !products) return <div> Retrying... {error}</div>
   return (
     <div className="products-container">
       {products.map(product => (
-        <Product key={product.id} product={product} />
+        <Product key={product.id} product={product} onAddToCart={onAddToCart} />
       ))}
     </div>
   );
