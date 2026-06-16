@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-// Base URL for API requests, set via environment variable. 
+// Base URL for API requests, set via environment variable.
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 let token = localStorage.getItem("token");
-
 
 // --- ACCOUNT RELATED ---
 
@@ -38,7 +37,6 @@ export const logoutUser = () => {
   window.location.href = "/"; // Redirect to login page after logout
 };
 
-
 export const useProducts = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -60,7 +58,6 @@ export const useProducts = () => {
   return { data, loading, error };
 };
 
-
 // --- PRODUCTS RELATED && ORDER RELATED ---
 
 export const createOrder = async (cartItems) => {
@@ -68,11 +65,11 @@ export const createOrder = async (cartItems) => {
     const currentToken = localStorage.getItem("token");
 
     const orderRequest = {
-      items: cartItems.map(item => ({
+      items: cartItems.map((item) => ({
         productId: item.id,
-        quantity: item.quantity
-      }))
-    }
+        quantity: item.quantity,
+      })),
+    };
     const res = await axios.post(`${API_BASE_URL}/api/orders`, orderRequest, {
       headers: {
         Authorization: `Bearer ${currentToken}`,
@@ -81,6 +78,28 @@ export const createOrder = async (cartItems) => {
     return res.data;
   } catch (err) {
     throw new Error(err.response?.data?.message || "Order creation failed");
-      }
+  }
 };
-  
+
+export const checkCurrentUser = async () => {
+  const currentToken = localStorage.getItem("token");
+  console.log("first check")
+  // if there is not token, stop here
+  if (!token) return null;
+
+  try {
+    const res = await axios.get(`${API_URL}/me`, {
+      headers: {
+        Authorization: `Bearer ${currentToken}`,
+      },
+    });
+    console.log("second check")
+    return res.data;
+  } catch (err) {
+    // the reason to have a const here is to catch the error to just be able to log it, I don't want anything to crash for the user since it's not crucial to the app
+    const errorMsg = err.response?.data?.message || "Session invalid";
+    console.error(errorMsg);
+    localStorage.removeItem("token");
+    return null;
+  }
+};
