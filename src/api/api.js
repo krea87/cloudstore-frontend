@@ -84,11 +84,11 @@ export const createOrder = async (cartItems) => {
 export const checkCurrentUser = async () => {
   const currentToken = localStorage.getItem("token");
   console.log("first check")
-  // if there is not token, stop here
-  if (!token) return null;
+  // if there is no current token, stop here
+  if (!currentToken) return null;
 
   try {
-    const res = await axios.get(`${API_URL}/me`, {
+    const res = await axios.get(`${API_BASE_URL}/api/auth/me`, {
       headers: {
         Authorization: `Bearer ${currentToken}`,
       },

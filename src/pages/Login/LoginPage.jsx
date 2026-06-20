@@ -30,7 +30,7 @@ function LoginPage() {
                 const data = await loginUser(formData);
                 setSuccess(true);
                 console.log("Login successful, user data:", data);
-                navigate("/products"); // navigate to products page after successful login, will implement later
+                window.location.href = "/products";
             } catch (error) {
                 setError(error.message);
                 console.error("Login failed:", error);
