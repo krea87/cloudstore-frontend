@@ -2,6 +2,7 @@ import React from "react";
 import { createOrder } from "../../api/api";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import "../../index.css"
 import "./Cart.css";
 
 function CartPage({ cart, setCart }) {
@@ -48,8 +49,8 @@ return (
                     <p>Quantity: {item.quantity}</p>
                   </div>
                   <div className="item-pricing">
-                    <p>Price: {item.price}</p>
-                    <p className="item-subtotal">Subtotal: {itemSubtotal}</p>
+                    <p>Price: {item.price}€</p>
+                    <p className="item-subtotal">Subtotal: {itemSubtotal}€</p>
                   </div>
                 </div>
               );
@@ -59,12 +60,12 @@ return (
           <div className="cart-summary">
             <h4> Total: {totalPrice}€</h4>
             {error && <p className="error">{error}</p>}
-            <button onClick={handleCheckout} disabled={loading} className="checkout-btn">
-              {loading ? "Processing..." : "Place Order"}
-            </button>
           </div>
         </div>
       )}
+            <button onClick={handleCheckout} disabled={loading} className="checkout-btn">
+              {loading ? "Processing..." : "Place Order"}
+            </button>
     </div>
   );
 }

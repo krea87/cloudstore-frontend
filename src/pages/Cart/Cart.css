@@ -1,0 +1,22 @@
+.cart-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 4rem;
+    gap: var(--gap);
+    
+}
+
+.cart-content {
+ color: orange;
+}
+
+.cart-items {
+    
+}
+
+.cart-summary {
+    
+    
+}

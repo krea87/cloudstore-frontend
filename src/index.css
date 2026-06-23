@@ -105,5 +105,92 @@ body {
 }
 
 :root {
+
   color-scheme: dark;
+
+  --font-size: clamp(0.5rem, calc(1vw + .5rem), 1rem);
+  --title-size: clamp(1.5rem, calc(5vw + 2rem), 5rem);
+  --sub-title: clamp(0.7rem, calc(2.5vw + 1.5rem), 3rem);
+
+  --gap: 1rem;
+
+  /* Colors */
+
+  --primary-black: hsl(0 0% 0%);
+  --primary-white: hsl(0 100% 100%);
+}
+  h1 {
+    margin-bottom: 1rem;
+    font-size: var(--title-size);
+    font-weight: 300;
+   
+  }
+  h2 {
+    margin-bottom: 1rem;
+    font-size: var(--sub-title);
+    font-weight: 300;
+   
+    text-decoration: underline;
+  }
+
+.form-container {
+  margin: 3rem;
+   text-align: center;
+  display: grid;
+  place-content: center;
+  gap: var(--gap);
+  
+  * {
+    font-size: var(--font-size);
+    color: var(--primary-white);
+    }
+  
+  }
+
+  
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  @media (width > 65em) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+  input {
+    padding: 0.5em;
+    width: 100%;
+
+     border-radius: 8px; /* Fallback Firefox */
+
+    @supports (corner-shape: squircle) {
+      border-radius: 80svh;
+      corner-shape: squircle;
+    }
+    
+  }
+
+
+
+  button {
+    border: 1px solid #ccc;
+    font-size: var(--font-size);
+    padding: 0.5em 1.5em;
+    height: fit-content;
+    color: var(--primary-black);
+    font-weight: 400;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    border-radius: 8px;
+
+    @supports (corner-shape: squircle) {
+      border-radius: 80svh;
+      corner-shape: squircle;
+    }
+  }
+
+  .error {
+    color: red;
+  }
 }

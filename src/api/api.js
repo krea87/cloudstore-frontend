@@ -83,7 +83,7 @@ export const createOrder = async (cartItems) => {
 
 export const checkCurrentUser = async () => {
   const currentToken = localStorage.getItem("token");
-  console.log("first check")
+ 
   // if there is no current token, stop here
   if (!currentToken) return null;
 
@@ -93,7 +93,7 @@ export const checkCurrentUser = async () => {
         Authorization: `Bearer ${currentToken}`,
       },
     });
-    console.log("second check")
+    
     return res.data;
   } catch (err) {
     // the reason to have a const here is to catch the error to just be able to log it, I don't want anything to crash for the user since it's not crucial to the app
